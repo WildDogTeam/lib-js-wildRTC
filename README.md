@@ -29,7 +29,7 @@
 
 	gulp test
 
-这会在本地 http://localhost:8080 建立一个 webserver，可以访问 test.html 或用户自己建立的网页。需要注意的是，chrome 浏览器只支持在 https 下打开本地流，因此最好使用 firefox 打开，或者自己搭建 https 服务器，引用 lib 目录下的 WildRTC.js。
+这会在本地 http://localhost:8080 建立一个 webserver，可以访问 test.html 或用户自己建立的网页。
 
 ## 使用 WildRTC
 ### 创建引用
