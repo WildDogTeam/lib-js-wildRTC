@@ -1,8 +1,8 @@
 # lib-js-wildRTC
 使用Wilddog实现的实时音视频聊天库.可使用test.html来测试。
 
-
-## 使用gulp搭建测试环境
+## 引入WildRTC SDK
+### 使用gulp搭建测试环境
 
 下载代码到本地，并进入`lib-js-wildRTC`目录
 
@@ -31,7 +31,8 @@
 
 这会在本地 http://localhost:8080 建立一个 webserver，可以访问 test.html 或用户自己建立的网页。需要注意的是，chrome浏览器只支持在 https 下打开本地流，因此最好使用firefox打开，或者自己搭建 https 服务器，引用 lib 目录下的 WildRTC.js。
 
-## 创建引用
+## 使用 WildRTC
+### 创建引用
 
 要使用 WildRTC，必须先创建 WildDog 引用并登录：
 
@@ -47,7 +48,7 @@ ref.onAuth(function(auth) {
 
 <hr>
 
-## 加入会话
+### 加入会话
 
 创建 WildRTC 引用之后，就可以通过`join(callback)` 进入会话：
 
@@ -56,7 +57,7 @@ wildRTC.join(callback(err));
 ```
 <hr>
 
-## 监听远端媒体流
+### 监听远端媒体流
 
 可以使用`on(type,callback,cancelCallback)`的事件监听来获取远端的媒体流。
 
@@ -72,7 +73,7 @@ wildRTC.on("stream_added",function(WildStream){
 
 <hr>
 
-## 获取本地媒体流
+### 获取本地媒体流
 
 我们提供`getLocalStream(options,callback,cancelCallback)`来获取本地媒体流。
 
@@ -89,7 +90,7 @@ options 内容为设置获取媒体流的规格，为JSON 字符串。可以传�
 
 <hr>
 
-## 向远端发送媒体流
+### 向远端发送媒体流
 
 拿到WildStream后，通过`addStream(wildStream)`向远端其他用户发送媒体流。
 
@@ -99,7 +100,7 @@ wildRTC.addStream(wildStream);
 
 <hr>
 
-## 媒体流与页面绑定
+### 媒体流与页面绑定
 
 WildStream对象提供`bindToDOM(elementId)`快速将媒体流与页面绑定。
 
