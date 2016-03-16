@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>OpenWebRTC Demo</title>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <script src="https://cdn.wilddog.com/js/client/current/wilddog.js"></script>
+    <script src="./lib/WildRTC.js"></script>
+</head>
+
+<body>
+    <header>
+        <div id="heading">
+            <h2>Simple WebRTC Example</h2>
+        </div>
+        <div id="owr-logo"></div>
+    </header>
+    <section id="main-section">
+        appid
+        <input type="text" id="appid_txt" value="" size="10">
+        <input class="btn" type="button" id="join_but" value="Join">
+        <br>
+        <div id="video-container">
+            <video id="self_view" class="shadow" autoplay="true" muted></video>
+        </div>
+    </section>
+    <footer>
+        Copyright Ericsson Research 2016
+    </footer>
+    <script>
+    var appid = document.getElementById("appid_txt");
+    var joinBtn = document.getElementById("join_but");
+    var ref;
+    joinBtn.onclick = function(evt) {
+        var url = "https://" + appid.value + ".wilddogio.com/rtc";
+        console.log("url = ", url);
+        ref = new Wilddog(url);
+        if (ref.getAuth() == null) {
+            ref.authAnonymously(function() {});
+        }
+        ref.onAuth(function(auth) {
+            if (auth != null) {
+                var rtc = new WildRTC(ref);
+
+                rtc.join(function() {
+                    rtc.getLocalStream(null, function(wildStream) {
+                        wildStream.bindToDOM('self_view');
+                        rtc.addStream(wildStream);
+                    }, function(err) {
+                        console.error(err);
+                    });
+
+                })
+
+                rtc.on('stream_added', function(wildStream) {
+                    var viewContainer = document.getElementById("video-container");
+                    var v = document.createElement("video");
+                    viewContainer.appendChild(v);
+                    v.autoplay = true;
+                    v.id = wildStream.getId();
+                    v.src = URL.createObjectURL(wildStream.getStream());
+                });
+                rtc.on('stream_removed', function(wildStream) {
+                    var v = document.getElementById(wildStream.getId());
+                    v.remove();
+                })
+            }
+        })
+    }
+    </script>
+</body>
+
+</html>

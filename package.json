@@ -1,0 +1,38 @@
+{
+  "name": "wild-rtc",
+  "version": "0.1.0",
+  "description": "webrtc with wilddog support",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stackOverMind/WildRTC.git"
+  },
+  "keywords": [
+    "webrtc",
+    "wilddog",
+    "realtime",
+    "p2p"
+  ],
+  "author": "wilddog",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stackOverMind/WildRTC/issues"
+  },
+  "homepage": "https://github.com/stackOverMind/WildRTC#readme",
+  "devDependencies": {
+    "browserify": "^13.0.0",
+    "events": "^1.1.0",
+    "gulp": "^3.9.1",
+    "gulp-browserify": "^0.5.1",
+    "gulp-connect": "^3.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.3"
+  },
+  "dependencies": {
+    "webrtc-adapter": "^1.0.4",
+    "wild-peerconnection": "^1.0.2"
+  }
+}
