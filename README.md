@@ -1,5 +1,5 @@
 # lib-js-wildRTC
-使用Wilddog实现的实时音视频聊天库.可使用test.html来测试。
+使用 Wilddog 实现的实时音视频聊天库.可使用 test.html 来测试。
 
 ## 引入WildRTC SDK
 ### 使用gulp搭建测试环境
@@ -29,7 +29,7 @@
 
 	gulp test
 
-这会在本地 http://localhost:8080 建立一个 webserver，可以访问 test.html 或用户自己建立的网页。需要注意的是，chrome浏览器只支持在 https 下打开本地流，因此最好使用firefox打开，或者自己搭建 https 服务器，引用 lib 目录下的 WildRTC.js。
+这会在本地 http://localhost:8080 建立一个 webserver，可以访问 test.html 或用户自己建立的网页。需要注意的是，chrome 浏览器只支持在 https 下打开本地流，因此最好使用 firefox 打开，或者自己搭建 https 服务器，引用 lib 目录下的 WildRTC.js。
 
 ## 使用 WildRTC
 ### 创建引用
@@ -63,13 +63,13 @@ wildRTC.join(callback(err));
 
 ```js
 wildRTC.on("stream_added",function(WildStream){
-	console.log(WildStream.getId());	//结果会在 console 中打印出远端WildStream的Id
+	console.log(WildStream.getId());	//结果会在 console 中打印出远端 WildStream 的 Id
 })
 ```
 
 回调函数的参数是一个 WildStream 对象类型，调用它的`getStream()`函数得到媒体流。上边这个例子中，`stream_added`这个事件会在每次收到远端 WildStream 时被触发。
 
-同时，我们还提供`stream_removed`事件，用来监听远端停止发送 WildStream事件，并在回调函数中提供停止发送的远端WildStream 。
+同时，我们还提供`stream_removed`事件，用来监听远端停止发送 WildStream 的事件，并在回调函数中提供停止发送的远端WildStream 。
 
 <hr>
 
