@@ -2,6 +2,35 @@
 使用Wilddog实现的实时音视频聊天库.可使用test.html来测试。
 
 
+## 使用gulp搭建测试环境
+
+下载代码到本地，并进入`lib-js-wildRTC`目录
+
+	git clone https://github.com/WildDogTeam/lib-js-wildRTC.git
+
+安装 gulp，在ubuntu下使用命令
+
+	sudo npm install gulp
+
+安装依赖
+
+	sudo npm install uglify-js
+	sudo npm install gulp-uglify
+	sudo npm install gulp-browserify
+	sudo npm install gulp-rename
+	sudo npm install gulp-connect
+	sudo npm install wild-peerconnection
+
+打包成一个 js。打包后会在 lib 下生成 WildRTC.js。
+
+	gulp build
+
+建立测试环境
+
+	gulp test
+
+这会在本地 http://localhost:8080 建立一个 webserver，可以访问 test.html 或用户自己建立的网页。需要注意的是，chrome浏览器只支持在 https 下打开本地流，因此最好使用firefox打开，或者自己搭建 https 服务器，引用 lib 目录下的 WildRTC.js。
+
 ## 创建引用
 
 要使用 WildRTC，必须先创建 WildDog 引用并登录：
