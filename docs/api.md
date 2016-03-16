@@ -94,7 +94,7 @@ rtc.join(function (err){
 
 ###### 定义
 
-addStream(stream, onComplete)
+addStream(stream)
 
 ###### 说明
 
@@ -104,9 +104,6 @@ addStream(stream, onComplete)
 
 * stream `WildStream` 
 WildStream 流对象。
-
-* onComplete `function(err)` 
-如果操作成功`err`为`null`；否则，`err`为包含错误码`code`的对象。
 
 ###### 示例
 
