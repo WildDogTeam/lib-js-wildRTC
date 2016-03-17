@@ -107,6 +107,15 @@ WildRTC.prototype.leave = function() {
 WildRTC.prototype.getLocalStream = function(options, callback, cancelCallback) {
     var self = this;
     if (options != null) {
+        if (options['video'] == true) {
+            options['video'] = {
+                "mandatory": {
+                    frameRate: { ideal: 1, max: 10 },
+                    "width": 320,
+                    "height": 240 
+                }
+            }
+        }
         navigator.getUserMedia(options, function(stream) {
             var wildStream = new WildStream(self.uid);
             wildStream.setStream(stream);
@@ -118,7 +127,13 @@ WildRTC.prototype.getLocalStream = function(options, callback, cancelCallback) {
     } else {
         navigator.getUserMedia({
             'audio': true,
-            'video': { "optional": [{ "width": { "max": 700 } }, { "height": { "max": 392 } }] }
+            'video': {
+                "mandatory": {
+                    frameRate: { ideal: 1, max: 10 },
+                    "width": 320,
+                    "height": 240 
+                }
+            }
         }, function(stream) {
             var wildStream = new WildStream(self.uid);
             wildStream.setStream(stream);
