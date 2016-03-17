@@ -1,12 +1,18 @@
-# lib-js-wildRTC
-使用 Wilddog 实现的实时音视频聊天库.可使用 test.html 来测试。
+# lib-js-wildRTC - Wilddog 实现实时音视频聊天
 
-## 引入WildRTC SDK
-### 使用gulp搭建测试环境
+使用 [Wilddog](https://www.wilddog.com) 实现的实时音视频聊天库。可使用 test.html 来测试。
+
+## 在线示例
+我们提供了一个实例，登录到同一个房间的用户之间能够进行实时音视频聊天。
+
+[![演示截图](./docs/screenshot.jpg)](https://wildrtc.wilddogapp.com/)
+
+## 本地运行
 
 下载代码到本地，并进入`lib-js-wildRTC`目录
 
 	git clone https://github.com/WildDogTeam/lib-js-wildRTC.git
+	cd lib-js-wildRTC
 
 安装 gulp，在ubuntu下使用命令
 
@@ -25,16 +31,29 @@
 
 	gulp build
 
-建立测试环境
+运行测试
 
 	gulp test
 
-这会在本地 https://localhost:8080 建立一个 webserver，可以访问 test.html 或用户自己建立的网页。
+这会在本地 https://localhost:8080 建立一个 webserver，可以访问 test.html 进入聊天。
 
-## 使用 WildRTC
+## 下载
+
+要在你的工程中使用 WildRTC，你需要将 lib 目录下的 WildRTC.js 拷贝到本地，并在你的HTML页面中引入以下文件：
+
+```html
+<!-- Wilddog -->
+<script src="https://cdn.wilddog.com/js/client/current/wilddog.js"></script>
+
+<!-- WildRTC -->
+<script src="WildRTC.js"></script>
+```
+
+## API 文档
+
 ### 创建引用
 
-要使用 WildRTC，必须先创建 WildDog 引用并登录：
+要使用 WildRTC，必须先创建 Wilddog 引用并登录：
 
 ```js
 var ref = new Wilddog("https://<appId>.wilddogio.com/");
@@ -108,5 +127,39 @@ WildStream对象提供`bindToDOM(elementId)`快速将媒体流与页面绑定。
 wildStream.bindToDOM('self_view');
 ```
 
-更多详细接口见 docs 下的API文档。
+[更多API文档](./docs/api.md)
+
+## 注册Wilddog
+
+WildRTC 需要使用 Wilddog 数据库，你可以在此[注册](https://www.wilddog.com/my-account/signup) Wilddog 账户。
+
+## TODO
+
+- getLocalStream 支持更详细的配置 ： 进行中
+- 多浏览器支持 ： 进行中
+
+## 支持
+如果在使用过程中有任何问题，请提 [issue](https://github.com/WildDogTeam/lib-js-wildRTC/issues) ，我会在 Github 上给予帮助。
+
+## 相关文档
+
+* [Wilddog 概览](https://z.wilddog.com/overview/introduction)
+* [JavaScript SDK快速入门](https://z.wilddog.com/web/quickstart)
+* [JavaScript SDK API](https://z.wilddog.com/web/api)
+* [下载页面](https://www.wilddog.com/download/)
+* [Wilddog FAQ](https://z.wilddog.com/questions)
+
+## License
+MIT
+http://wilddog.mit-license.org/
+
+## 感谢 Thanks
+
+lib-js-wildRTC is built on and with the aid of several projects. We would like to thank the following projects for helping us achieve our goals:
+
+Open Source:
+
+* [JQuery](http://jquery.com) The Write Less, Do More, JavaScript Library
+* [OpenWebRTC](http://www.openwebrtc.org/) A mobile-first WebRTC client framework for building native apps
+* [WebRTC](https://webrtc.org/) WebRTC is a free, open project that provides browsers and mobile applications with Real-Time Communications (RTC) capabilities via simple APIs
 
