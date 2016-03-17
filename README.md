@@ -29,7 +29,7 @@
 
 	gulp test
 
-这会在本地 http://localhost:8080 建立一个 webserver，可以访问 test.html 或用户自己建立的网页。
+这会在本地 https://localhost:8080 建立一个 webserver，可以访问 test.html 或用户自己建立的网页。
 
 ## 使用 WildRTC
 ### 创建引用
