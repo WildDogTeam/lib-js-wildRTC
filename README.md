@@ -1,6 +1,6 @@
 # lib-js-wildRTC - Wilddog 实现实时音视频聊天
 
-使用 [Wilddog](https://www.wilddog.com) 实现的实时音视频聊天库。可使用 test.html 来测试。
+使用 [Wilddog](https://www.wilddog.com) 实现的实时音视频聊天库。
 
 ## 在线示例
 我们提供了一个实例，登录到同一个房间的用户之间能够进行实时音视频聊天。
