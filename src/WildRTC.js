@@ -109,11 +109,9 @@ WildRTC.prototype.getLocalStream = function(options, callback, cancelCallback) {
     if (options != null) {
         if (options['video'] == true) {
             options['video'] = {
-                "mandatory": {
-                    frameRate: { ideal: 1, max: 10 },
+                    frameRate: 8,
                     "width": 320,
                     "height": 240 
-                }
             }
         }
         navigator.getUserMedia(options, function(stream) {
@@ -128,11 +126,9 @@ WildRTC.prototype.getLocalStream = function(options, callback, cancelCallback) {
         navigator.getUserMedia({
             'audio': true,
             'video': {
-                "mandatory": {
-                    frameRate: { ideal: 1, max: 10 },
+                    frameRate: 8,
                     "width": 320,
                     "height": 240 
-                }
             }
         }, function(stream) {
             var wildStream = new WildStream(self.uid);
