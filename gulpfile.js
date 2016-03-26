@@ -25,6 +25,6 @@ gulp.task('test', function() {
     root: './',
     livereload: true,
     https: true,
-    fallback:"test.html"
+    fallback:"testKurento.html"
   });
 });
