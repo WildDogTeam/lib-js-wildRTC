@@ -20,12 +20,9 @@
 
 安装依赖
 
-	sudo npm install uglify-js
-	sudo npm install gulp-uglify
-	sudo npm install gulp-browserify
-	sudo npm install gulp-rename
-	sudo npm install gulp-connect
-	sudo npm install wild-peerconnection
+	sudo npm install 
+
+其中，依赖中的 wild-peerconnection 为连接层代码，项目位于https://github.com/WildDogTeam/lib-js-wildPeerConnection 。
 
 打包成一个 js。打包后会在 lib 下生成 WildRTC.js。
 
@@ -47,6 +44,12 @@
 
 <!-- WildRTC -->
 <script src="WildRTC.js"></script>
+```
+
+你也可以通过 npm 安装 WildRTC, 他们会自动下载依赖。
+
+```bash
+$ npm install wildrtc --save
 ```
 
 ## API 文档
