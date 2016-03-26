@@ -93,16 +93,22 @@ WildRTC.prototype.join = function(callback) {
 
 WildRTC.prototype.leave = function() {
     for (var peer in this.hasStreamList) {
-        this.hasStreamList[peer].close();
-        delete this.hasStreamList[peer];
+        if (this.hasStreamList[peer].signalingState != 'closed') {
+            this.hasStreamList[peer].close();
+            delete this.hasStreamList[peer];
+        }
     }
     for (var peer in this.noStreamList) {
-        this.noStreamList[peer].close();
-        delete this.noStreamList[peer];
+        if (this.noStreamList[peer].signalingState != 'closed') {
+            this.noStreamList[peer].close();
+            delete this.noStreamList[peer];
+        }
     }
     for (var peer in this.receivePeerList) {
-        this.receivePeerList[peer].close();
-        delete this.receivePeerList[peer];
+        if (this.receivePeerList[peer].signalingState != 'closed') {
+            this.receivePeerList[peer].close();
+            delete this.receivePeerList[peer];
+        }
     }
     var wildData = new WildData(this.ref);
     wildData.leave(this.uid);
@@ -114,7 +120,7 @@ WildRTC.prototype.getLocalStream = function(options, callback, cancelCallback) {
         if (options['video'] == true) {
             options['video'] = {
                 "mandatory": {
-                    frameRate: { ideal: 1, max: 10 },
+                    frameRate: 15,
                     "width": 320,
                     "height": 240
                 }
@@ -132,7 +138,7 @@ WildRTC.prototype.getLocalStream = function(options, callback, cancelCallback) {
         navigator.getUserMedia({
             'audio': true,
             'video': {
-                frameRate: { max: 10 },
+                frameRate: 15,
                 "width": 320,
                 "height": 240
             }
