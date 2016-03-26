@@ -1,14 +1,14 @@
 {
-  "name": "wild-rtc",
-  "version": "0.1.0",
+  "name": "wildrtc",
+  "version": "0.1.1",
   "description": "webrtc with wilddog support",
-  "main": "index.js",
+  "main": "src/WildRTC.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stackOverMind/WildRTC.git"
+    "url": "git+https://github.com/WildDogTeam/lib-js-wildRTC.git"
   },
   "keywords": [
     "webrtc",
@@ -17,11 +17,11 @@
     "p2p"
   ],
   "author": "wilddog",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/stackOverMind/WildRTC/issues"
+    "url": "https://github.com/WildDogTeam/lib-js-wildRTC/issues"
   },
-  "homepage": "https://github.com/stackOverMind/WildRTC#readme",
+  "homepage": "https://github.com/WildDogTeam/lib-js-wildRTC.git",
   "devDependencies": {
     "browserify": "^13.0.0",
     "events": "^1.1.0",
