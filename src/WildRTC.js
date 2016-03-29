@@ -88,7 +88,6 @@ WildRTC.prototype.join = function(callback) {
             }
         });
     });
-
 }
 
 WildRTC.prototype.leave = function() {
@@ -117,7 +116,7 @@ WildRTC.prototype.leave = function() {
 WildRTC.prototype.getLocalStream = function(options, callback, cancelCallback) {
     var self = this;
     if (options != null) {
-        if (options['video'] == true) {
+        /*if (options['video'] == true) {
             options['video'] = {
                 "mandatory": {
                     frameRate: 15,
@@ -125,7 +124,7 @@ WildRTC.prototype.getLocalStream = function(options, callback, cancelCallback) {
                     "height": 240
                 }
             }
-        }
+        }*/
         navigator.getUserMedia(options, function(stream) {
             var wildStream = new WildStream(self.uid);
             wildStream.setStream(stream);
@@ -137,11 +136,7 @@ WildRTC.prototype.getLocalStream = function(options, callback, cancelCallback) {
     } else {
         navigator.getUserMedia({
             'audio': true,
-            'video': {
-                frameRate: 15,
-                "width": 320,
-                "height": 240
-            }
+            'video': true
         }, function(stream) {
             var wildStream = new WildStream(self.uid);
             wildStream.setStream(stream);
@@ -151,7 +146,6 @@ WildRTC.prototype.getLocalStream = function(options, callback, cancelCallback) {
             cancelCallback(err);
         })
     }
-
 };
 
 WildRTC.prototype.addStream = function(wildStream) {
