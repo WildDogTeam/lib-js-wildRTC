@@ -6,7 +6,7 @@
 
 我们提供了一个实例，登录到同一个房间的用户之间能够进行实时音视频聊天。
 
-[![演示截图](./docs/screenshot.png)](https://wildrtc.wilddogapp.com/)
+[![演示截图](./docs/snapshot.png)](https://wildrtc.wilddogapp.com/)
 
 ### 体验示例
 
