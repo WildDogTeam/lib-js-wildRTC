@@ -10,7 +10,7 @@
 
 ### 体验示例
 
-打开网页https://wildrtc.wilddogapp.com/，输入一个房间名，进入房间。在同一房间的用户之间能够互相视频聊天。
+打开网页 https://wildrtc.wilddogapp.com ，输入房间名，进入房间。在同一房间的用户之间能够互相视频聊天。
 
 ## 本地运行
 
@@ -30,6 +30,8 @@
 备注：使用 https 服务是由于在 chrome 浏览器中，必须使用 https 服务才能调用本地摄像头和麦克风。
 
 ### 进行测试
+
+界面截图：
 
 ![演示截图1](./docs/test.png)
 
@@ -59,7 +61,7 @@ $ npm install wildrtc --save
 
 ### 创建引用
 
-要使用 WildRTC，必须先创建 Wilddog 引用并登录：
+要使用 WildRTC，必须先创建 Wilddog 引用并登录或者匿名登录：
 
 ```js
 var ref = new Wilddog("https://<appId>.wilddogio.com/");
