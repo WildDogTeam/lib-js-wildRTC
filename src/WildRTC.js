@@ -50,6 +50,11 @@ WildRTC.prototype.join = function(callback) {
                                 wildStream.setStream(null);
                                 self.wildEmitter.emit('stream_removed', wildStream);
                             });
+                            wildData.onStreamRemove(localReceiveRef, function() {
+                                var wildStream = new WildStream(remoteId);
+                                wildStream.setStream(null);
+                                self.wildEmitter.emit('stream_removed', wildStream);
+                            });
                             self.receivePeerList[remoteId] = self.receivePeerConnection;
                             if (self.isAddStream) {
                                 if (self.localStream != null) {

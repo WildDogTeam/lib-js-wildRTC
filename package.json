@@ -1,6 +1,6 @@
 {
   "name": "wildrtc",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "webrtc with wilddog support",
   "main": "src/WildRTC.js",
   "scripts": {
