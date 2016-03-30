@@ -10,7 +10,7 @@ gulp.task('browserify', function() {
             insertGlobals: true,
             debug: false
         }))
-        .pipe(rename("lib-WildRTC.js"))
+        .pipe(rename("wildrtc.js"))
         .pipe(gulp.dest('./lib/'))
 });
 
