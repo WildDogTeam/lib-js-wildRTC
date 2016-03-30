@@ -20,7 +20,6 @@ var WildRTCDirect = function(ref) {
     this.key = Math.random().toString(16).substr(2);
 }
 
-window.WildRTCDirect = WildRTCDirect;
 WildRTCDirect.prototype.join = function(callback) {
     var configProvider = new ConfigProvider(this.appid, this.ref);
     var wildData = new WildData(this.ref);
@@ -46,6 +45,11 @@ WildRTCDirect.prototype.join = function(callback) {
                                 self.wildEmitter.emit('stream_added', wildStream);
                             });
                             self.receivePeerConnection.on('removestream', function() {
+                                var wildStream = new WildStream(remoteId);
+                                wildStream.setStream(null);
+                                self.wildEmitter.emit('stream_removed', wildStream);
+                            });
+                            wildData.onStreamRemove(localReceiveRef, function() {
                                 var wildStream = new WildStream(remoteId);
                                 wildStream.setStream(null);
                                 self.wildEmitter.emit('stream_removed', wildStream);
@@ -182,8 +186,9 @@ WildRTCDirect.prototype.on = function(string, callback, cancelCallback) {
 };
 
 WildRTCDirect.prototype.off = function(string) {
-
     if (string == 'stream_added' || string == 'stream_removed') {
         this.WildEmitter.off(string);
     }
 };
+
+module.exports.WildRTCDirect = WildRTCDirect;

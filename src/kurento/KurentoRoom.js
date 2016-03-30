@@ -1,10 +1,15 @@
     // Room --------------------------------
 var RpcBuilder = require('kurento-jsonrpc');
-var EventEmitter = require('events').EventEmitter;
+var EventEmitter = require('./EventEmitter.js');
 var kurentoUtils = require('kurento-utils');
-var RTCSessionDescription = require('webrtc-adapter').RTCSessionDescription;
-var WebSocket = require('ws');
-
+// var RTCSessionDescription = require('webrtc-adapter').RTCSessionDescription;
+var BrowserWebSocket = global.WebSocket || global.MozWebSocket;
+var WebSocket = BrowserWebSocket;
+if (!WebSocket && typeof window === 'undefined') {
+  try {
+    WebSocket = require('ws');
+  } catch (e) { }
+}
 
 function jq( myid ) {
  
@@ -911,4 +916,7 @@ function KurentoRoom(wsUri, callback) {
 
 }
 
-module.exports = KurentoRoom;
+module.exports.KurentoRoom = KurentoRoom;
+module.exports.Room = Room;
+module.exports.Participant = Participant;
+module.exports.KurentoStream = Stream;

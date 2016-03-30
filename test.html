@@ -40,7 +40,7 @@
         }
         ref.onAuth(function(auth) {
             if (auth != null) {
-                var rtc = new WildRTC(ref);
+                var rtc = new WildRTC(ref,'proxy');
 
                 rtc.join(function() {
                     rtc.getLocalStream(null, function(wildStream) {

@@ -63,4 +63,12 @@ WildData.prototype.onceKey = function(remoteid, callback) {
     })
 }
 
+WildData.prototype.onStreamRemove = function(ref, callback) {
+    ref.on('value',function(data){
+        if(data == null){
+            callback();
+        }
+    })
+}
+
 module.exports = WildData;
