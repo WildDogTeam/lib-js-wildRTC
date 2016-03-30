@@ -98,12 +98,11 @@ WildRTCProxy.prototype.getLocalStream = function(options, callback, cancelCallba
 
 WildRTCProxy.prototype.addStream = function(wildStream) {
     var self = this;
-    var options = { id: self.uid }
     self.localParticipant = new Participant(self.kurento,'local',self.room,{id:self.uid});
     self.kurentoStream = new KurentoStream(self.kurento, true, self.room, {id:self.uid , participant:self.localParticipant});
+    self.localParticipant.addStream(self.kurentoStream);
     self.kurentoStream.mirrorLocalStream(wildStream.getStream());
     self.kurentoStream.publish();
-    self.kurentoStream.getWrStream();
 };
 
 WildRTCProxy.prototype.removeStream = function() {
