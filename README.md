@@ -35,18 +35,18 @@
 
 在测试页面输入 Wilddog 的 AppId，打开摄像头。同一 AppId 的不同用户将进入同一聊天室。
 
-注意，由于 test.html采用匿名登录，因此该 AppId 需要开启匿名登录功能。 
+注意，由于 test.html 采用匿名登录，因此该 AppId 需要开启匿名登录功能。 
 
 ## 下载
 
-要在你的工程中使用 WildRTC，你需要将 lib 目录下的 WildRTC.js 拷贝到本地，并在你的HTML页面中引入以下文件：
+要在你的工程中使用 WildRTC，你需要将 lib 目录下的 wildrtc.js 拷贝到本地，并在你的 HTML 页面中引入以下文件：
 
 ```html
 <!-- Wilddog -->
 <script src="https://cdn.wilddog.com/js/client/current/wilddog.js"></script>
 
 <!-- WildRTC -->
-<script src="WildRTC.js"></script>
+<script src="wildrtc.js"></script>
 ```
 
 你也可以通过 npm 安装 WildRTC, 他们会自动下载依赖。
@@ -75,7 +75,7 @@ ref.onAuth(function(auth) {
 
 ### 加入会话
 
-创建 WildRTC 引用之后，就可以通过`join(callback)` 进入会话：
+创建 WildRTC 引用之后，就可以通过`join(callback)`进入会话：
 
 ```js
 wildRTC.join(callback(err));
@@ -88,7 +88,7 @@ wildRTC.join(callback(err));
 
 ```js
 wildRTC.on("stream_added",function(WildStream){
-	console.log(WildStream.getId());	//结果会在 console 中打印出远端 WildStream 的 Id
+	console.log(WildStream.getId());	//结果会在 console 中打印出远端 WildStream 的 id
 })
 ```
 
@@ -110,14 +110,14 @@ wildRTC.getLocalStream(options,function(WildStream){
 })
 ```
 
-options 内容为设置获取媒体流的规格，为JSON 字符串。可以传入`{"video":true|false, "audio":true|false}`来设置`video`和`audio`的开启情况。回调函数中的参数为 WildStream 对象类型。
+options 内容为设置获取媒体流的规格，为 JSON 字符串。可以传入`{"video":true|false, "audio":true|false}`来设置`video`和`audio`的开启情况。回调函数中的参数为 WildStream 对象类型。
 
 
 <hr>
 
 ### 向远端发送媒体流
 
-拿到WildStream后，通过`addStream(wildStream)`向远端其他用户发送媒体流。
+拿到 WildStream 后，通过`addStream(wildStream)`向远端其他用户发送媒体流。
 
 ```js
 wildRTC.addStream(wildStream);
@@ -127,7 +127,7 @@ wildRTC.addStream(wildStream);
 
 ### 媒体流与页面绑定
 
-WildStream对象提供`bindToDOM(elementId)`快速将媒体流与页面绑定。
+WildStream 对象提供`bindToDOM(elementId)`快速将媒体流与页面绑定。
 
 ```js
 wildStream.bindToDOM('self_view');
