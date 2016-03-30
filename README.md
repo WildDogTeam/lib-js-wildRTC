@@ -3,36 +3,39 @@
 使用 [Wilddog](https://www.wilddog.com) 实现的实时音视频聊天库。
 
 ## 在线示例
+
 我们提供了一个实例，登录到同一个房间的用户之间能够进行实时音视频聊天。
 
-[![演示截图](./docs/screenshot.jpg)](https://wildrtc.wilddogapp.com/)
+[![演示截图](./docs/screenshot.png)](https://wildrtc.wilddogapp.com/)
+
+### 体验示例
+
+打开网页https://wildrtc.wilddogapp.com/，输入一个房间名，进入房间。在同一房间的用户之间能够互相视频聊天。
 
 ## 本地运行
+
+### 下载代码
 
 下载代码到本地，并进入`lib-js-wildRTC`目录
 
 	git clone https://github.com/WildDogTeam/lib-js-wildRTC.git
 	cd lib-js-wildRTC
 
-安装 gulp，在ubuntu下使用命令
+### 打开测试服务
 
-	sudo npm install gulp
+	node https_channel_server.js
 
-安装依赖
+这会在本地 https://localhost:8080 建立一个 webserver，默认进入测试页面。
 
-	sudo npm install 
+备注：使用 https 服务是由于在 chrome 浏览器中，必须使用 https 服务才能调用本地摄像头和麦克风。
 
-其中，依赖中的 wild-peerconnection 为连接层代码，项目位于https://github.com/WildDogTeam/lib-js-wildPeerConnection 。
+### 进行测试
 
-打包成一个 js。打包后会在 lib 下生成 WildRTC.js。
+![演示截图1](./docs/test.png)
 
-	gulp build
+在测试页面输入 Wilddog 的 AppId，打开摄像头。同一 AppId 的不同用户将进入同一聊天室。
 
-运行测试
-
-	gulp test
-
-这会在本地 https://localhost:8080 建立一个 webserver，可以访问 test.html 进入聊天。
+注意，由于 test.html采用匿名登录，因此该 AppId 需要开启匿名登录功能。 
 
 ## 下载
 
