@@ -1,40 +1,67 @@
-# lib-js-wildRTC
-使用 Wilddog 实现的实时音视频聊天库.可使用 test.html 来测试。
+# lib-js-wildRTC - Wilddog 实现实时音视频聊天
 
-## 引入WildRTC SDK
-### 使用gulp搭建测试环境
+使用 [Wilddog](https://www.wilddog.com) 实现的实时音视频聊天库。
+
+## 在线示例
+
+我们提供了一个实例，登录到同一个房间的用户之间能够进行实时音视频聊天。
+
+[![演示截图](./docs/snapshot.png)](https://wildrtc.wilddogapp.com/)
+
+### 体验示例
+
+打开网页 https://wildrtc.wilddogapp.com ，输入房间名，进入房间。在同一房间的用户之间能够互相视频聊天。
+
+## 本地运行
+
+### 下载代码
 
 下载代码到本地，并进入`lib-js-wildRTC`目录
 
 	git clone https://github.com/WildDogTeam/lib-js-wildRTC.git
+	cd lib-js-wildRTC
 
-安装 gulp，在ubuntu下使用命令
+### 打开测试服务
 
-	sudo npm install gulp
+	node https_channel_server.js
 
-安装依赖
+这会在本地 https://localhost:8080 建立一个 webserver，默认进入测试页面。
 
-	sudo npm install uglify-js
-	sudo npm install gulp-uglify
-	sudo npm install gulp-browserify
-	sudo npm install gulp-rename
-	sudo npm install gulp-connect
-	sudo npm install wild-peerconnection
+备注：使用 https 服务是由于在 chrome 浏览器中，必须使用 https 服务才能调用本地摄像头和麦克风。
 
-打包成一个 js。打包后会在 lib 下生成 WildRTC.js。
+### 进行测试
 
-	gulp build
+界面截图：
 
-建立测试环境
+![演示截图1](./docs/test.png)
 
-	gulp test
+在测试页面输入 Wilddog 的 AppId，打开摄像头。同一 AppId 的不同用户将进入同一聊天室。
 
-这会在本地 https://localhost:8080 建立一个 webserver，可以访问 test.html 或用户自己建立的网页。
+注意，由于 test.html 采用匿名登录，因此该 AppId 需要开启匿名登录功能。 
 
-## 使用 WildRTC
+## 下载
+
+要在你的工程中使用 WildRTC，你需要将 lib 目录下的 wildrtc.js 拷贝到本地，并在你的 HTML 页面中引入以下文件：
+
+```html
+<!-- Wilddog -->
+<script src="https://cdn.wilddog.com/js/client/current/wilddog.js"></script>
+
+<!-- WildRTC -->
+<script src="wildrtc.js"></script>
+```
+
+你也可以通过 npm 安装 WildRTC, 他们会自动下载依赖。
+
+```bash
+$ npm install wildrtc --save
+```
+
+## API 文档
+
 ### 创建引用
 
-要使用 WildRTC，必须先创建 WildDog 引用并登录：
+要使用 WildRTC，必须先创建 Wilddog 引用并登录或者匿名登录：
 
 ```js
 var ref = new Wilddog("https://<appId>.wilddogio.com/");
@@ -50,7 +77,7 @@ ref.onAuth(function(auth) {
 
 ### 加入会话
 
-创建 WildRTC 引用之后，就可以通过`join(callback)` 进入会话：
+创建 WildRTC 引用之后，就可以通过`join(callback)`进入会话：
 
 ```js
 wildRTC.join(callback(err));
@@ -63,7 +90,7 @@ wildRTC.join(callback(err));
 
 ```js
 wildRTC.on("stream_added",function(WildStream){
-	console.log(WildStream.getId());	//结果会在 console 中打印出远端 WildStream 的 Id
+	console.log(WildStream.getId());	//结果会在 console 中打印出远端 WildStream 的 id
 })
 ```
 
@@ -85,14 +112,14 @@ wildRTC.getLocalStream(options,function(WildStream){
 })
 ```
 
-options 内容为设置获取媒体流的规格，为JSON 字符串。可以传入`{"video":true|false, "audio":true|false}`来设置`video`和`audio`的开启情况。回调函数中的参数为 WildStream 对象类型。
+options 内容为设置获取媒体流的规格，为 JSON 字符串。可以传入`{"video":true|false, "audio":true|false}`来设置`video`和`audio`的开启情况。回调函数中的参数为 WildStream 对象类型。
 
 
 <hr>
 
 ### 向远端发送媒体流
 
-拿到WildStream后，通过`addStream(wildStream)`向远端其他用户发送媒体流。
+拿到 WildStream 后，通过`addStream(wildStream)`向远端其他用户发送媒体流。
 
 ```js
 wildRTC.addStream(wildStream);
@@ -102,11 +129,45 @@ wildRTC.addStream(wildStream);
 
 ### 媒体流与页面绑定
 
-WildStream对象提供`bindToDOM(elementId)`快速将媒体流与页面绑定。
+WildStream 对象提供`bindToDOM(elementId)`快速将媒体流与页面绑定。
 
 ```js
 wildStream.bindToDOM('self_view');
 ```
 
-更多详细接口见 docs 下的API文档。
+[更多API文档](./docs/api.md)
+
+## 注册Wilddog
+
+WildRTC 需要使用 Wilddog 数据库，你可以在此[注册](https://www.wilddog.com/my-account/signup) Wilddog 账户。
+
+## TODO
+
+- getLocalStream 支持更详细的配置 ： 进行中
+- 多浏览器支持 ： 进行中
+
+## 支持
+如果在使用过程中有任何问题，请提 [issue](https://github.com/WildDogTeam/lib-js-wildRTC/issues) ，我会在 Github 上给予帮助。
+
+## 相关文档
+
+* [Wilddog 概览](https://z.wilddog.com/overview/introduction)
+* [JavaScript SDK快速入门](https://z.wilddog.com/web/quickstart)
+* [JavaScript SDK API](https://z.wilddog.com/web/api)
+* [下载页面](https://www.wilddog.com/download/)
+* [Wilddog FAQ](https://z.wilddog.com/questions)
+
+## License
+MIT
+http://wilddog.mit-license.org/
+
+## 感谢 Thanks
+
+lib-js-wildRTC is built on and with the aid of several projects. We would like to thank the following projects for helping us achieve our goals:
+
+Open Source:
+
+* [JQuery](http://jquery.com) The Write Less, Do More, JavaScript Library
+* [OpenWebRTC](http://www.openwebrtc.org/) A mobile-first WebRTC client framework for building native apps
+* [WebRTC](https://webrtc.org/) WebRTC is a free, open project that provides browsers and mobile applications with Real-Time Communications (RTC) capabilities via simple APIs
 

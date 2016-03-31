@@ -10,12 +10,12 @@ gulp.task('browserify', function() {
             insertGlobals: true,
             debug: false
         }))
-        .pipe(rename("WildRTC.js"))
+        .pipe(rename("wildrtc.js"))
         .pipe(gulp.dest('./lib/'))
 });
 
 gulp.task('build', ['browserify'], function() {
-    gulp.src('WildRTC.js')
+    gulp.src('lib-WildRTC.js')
         .pipe(uglify())
         .pipe(gulp.dest('./lib/'))
 })
@@ -24,7 +24,7 @@ gulp.task('test', function() {
   connect.server({
     root: './',
     livereload: true,
-    https: true,
+    https: false,
     fallback:"test.html"
   });
 });

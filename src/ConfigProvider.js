@@ -9,17 +9,22 @@ ConfigProvider.prototype.getConfig = function(callback) {
     console.log(token);
     var req = new XMLHttpRequest();
     var url = 'https://auth.wilddog.com/v1/' + this.appid + '/users/webrtc/secret?token=';
-    req.open('GET', url + token, false);
+    req.onreadystatechange = function() {
+        if (callback && req.readyState === 4) {
+            var res = null;
+            if (req.status == 200) {
+                var message = JSON.parse(req.responseText);
+                console.log(req.responseText);
+                this.configuration = {};
+                this.configuration.iceServers = message.iceServers;
+                console.log("##############");
+                console.log(this.configuration);
+                callback(this.configuration);
+            }
+        }
+    };
+    req.open('GET', url + token, true);
     req.send(null);
-    if (req.status == 200) {
-        var message = JSON.parse(req.responseText);
-        console.log(req.responseText);
-        this.configuration = {};
-        this.configuration.iceServers = message.iceServers;
-        console.log("##############");
-        console.log(this.configuration);
-        callback(this.configuration);
-    }
 }
 
 exports.ConfigProvider = ConfigProvider;
