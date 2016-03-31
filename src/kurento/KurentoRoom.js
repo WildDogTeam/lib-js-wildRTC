@@ -1,8 +1,7 @@
     // Room --------------------------------
 var RpcBuilder = require('kurento-jsonrpc');
-var EventEmitter = require('./EventEmitter.js');
+var EventEmitter = require('wolfy87-eventemitter');
 var kurentoUtils = require('kurento-utils');
-// var RTCSessionDescription = require('webrtc-adapter').RTCSessionDescription;
 var BrowserWebSocket = global.WebSocket || global.MozWebSocket;
 var WebSocket = BrowserWebSocket;
 if (!WebSocket && typeof window === 'undefined') {
@@ -664,6 +663,7 @@ function Stream(kurento, local, room, options) {
         	// except when showMyRemote is true
             if (!local || that.displayMyRemote()) {
                 wrStream = pc.getRemoteStreams()[0];
+                ee.emitEvent('stream-recive',[{id:id,stream:wrStream}]);
                 console.log("Peer remote stream", wrStream);
                 for (i = 0; i < videoElements.length; i++) {
                 	var thumbnailId = videoElements[i].thumb;

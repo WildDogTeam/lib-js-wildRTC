@@ -1,11 +1,11 @@
 var KurentoRoom = require('./kurento/KurentoRoom.js').KurentoRoom;
 var Participant = require('./kurento/KurentoRoom.js').Participant;
 var KurentoStream = require('./kurento/KurentoRoom.js').KurentoStream;
-var events = require('events');
+var EventEmitter = require('./kurento/EventEmitter.js');
 var WildStream = require('./WildStream');
 
 var WildRTCProxy = function(ref) {
-    this.wildEmitter = new events.EventEmitter();
+    this.wildEmitter = new EventEmitter();
     this.wsUri;
     this.kurento;
     this.roomId = ref.toString().split('/').pop();
@@ -37,12 +37,14 @@ WildRTCProxy.prototype.join = function(callback) {
             }
         });
         self.room.addEventListener("stream-added", function(data) {
-            var wildStream = new WildStream(data.stream.getID());
-            wildStream.setStream(data.stream.getWrStream());
-            self.wildEmitter.emit('stream_added', wildStream);
+            data.stream.addEventListener("stream-recive", function(data) {
+                var wildStream = new WildStream(data.id);
+                wildStream.setStream(data.stream);
+                self.wildEmitter.emit('stream_added', wildStream);
+            });
         });
         self.room.addEventListener("stream-published", function(data) {
-        	console.log('publish success ' + data.stream.getWrStream());
+            console.log('publish success ' + data.stream.getWrStream());
         });
         self.room.addEventListener('stream-removed', function(data) {
             var wildStream = new WildStream(data.stream.getID());
@@ -98,9 +100,11 @@ WildRTCProxy.prototype.getLocalStream = function(options, callback, cancelCallba
 
 WildRTCProxy.prototype.addStream = function(wildStream) {
     var self = this;
-    self.localParticipant = new Participant(self.kurento,'local',self.room,{id:self.uid});
-    self.kurentoStream = new KurentoStream(self.kurento, true, self.room, {id:self.uid , participant:self.localParticipant});
+    self.localParticipant = new Participant(self.kurento, 'local', self.room, { id: self.uid });
+    self.kurentoStream = new KurentoStream(self.kurento, true, self.room, { id: self.uid, participant: self.localParticipant });
+    console.log(self.localParticipant.getStreams());
     self.localParticipant.addStream(self.kurentoStream);
+    console.log(self.localParticipant.getStreams());
     self.kurentoStream.mirrorLocalStream(wildStream.getStream());
     self.kurentoStream.publish();
 };
