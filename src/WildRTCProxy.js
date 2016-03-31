@@ -29,17 +29,18 @@ WildRTCProxy.prototype.join = function(callback) {
         self.room.addEventListener('room-connected', function(roomEvent) {
             var streams = roomEvent.streams;
             for (var i = 0; i < streams.length; i++) {
-                var wildStream = new WildStream(streams[i].getID());
-                wildStream.setStream(streams[i].getWrStream());
-                self.wildEmitter.emit('stream_added', wildStream);
-                //create wildStream
-                //emmit
+                var remoteId = streams[i].getGlobalID();
+                streams[i].addEventListener("stream-recive", function(data) {
+                    var wildStream = new WildStream(remoteId);
+                    wildStream.setStream(data.stream);
+                    self.wildEmitter.emit('stream_added', wildStream);
+                });
             }
         });
         self.room.addEventListener("stream-added", function(data) {
-            data.stream.addEventListener("stream-recive", function(data) {
-                var wildStream = new WildStream(data.id);
-                wildStream.setStream(data.stream);
+            data.stream.addEventListener("stream-recive", function(stream) {
+                var wildStream = new WildStream(data.stream.getGlobalID());
+                wildStream.setStream(stream.stream);
                 self.wildEmitter.emit('stream_added', wildStream);
             });
         });
@@ -47,7 +48,7 @@ WildRTCProxy.prototype.join = function(callback) {
             console.log('publish success ' + data.stream.getWrStream());
         });
         self.room.addEventListener('stream-removed', function(data) {
-            var wildStream = new WildStream(data.stream.getID());
+            var wildStream = new WildStream(data.stream.getGlobalID());
             wildStream.setStream(null);
             self.wildEmitter.emit('stream_removed', wildStream);
         });

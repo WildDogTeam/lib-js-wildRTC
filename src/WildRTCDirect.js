@@ -59,13 +59,15 @@ WildRTCDirect.prototype.join = function(callback) {
                                 if (self.localStream != null) {
                                     self.sendPeerConnection.addStream(self.localStream.getStream(), function(err) {
                                         console.log('addstream');
-                                        callback(err);
+                                        if(err)
+                                            console.error(err);
                                     })
                                 } else {
                                     self.getLocalStream(null, function(wildStream) {
                                         self.sendPeerConnection.addStream(wildStream.getStream(), function(err) {
                                             console.log('addstream default');
-                                            callback(err);
+                                            if(err)
+                                                console.error(err);
                                         })
                                     })
                                 }
