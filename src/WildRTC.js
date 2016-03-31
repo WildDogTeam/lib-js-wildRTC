@@ -15,6 +15,7 @@ var WildRTC = function(ref, callback) {
     this.hasStreamList = {};
     this.noStreamList = {};
     this.receivePeerList = {};
+    this.receiveStreamList = {};
     this.sendPeerConnection = null;
     this.receivePeerConnection = null;
     this.key = Math.random().toString(16).substr(2);
@@ -41,32 +42,40 @@ WildRTC.prototype.join = function(callback) {
                             self.sendPeerConnection = new PeerConnection(localSendRef, remoteReceiveRef, configuration);
                             self.receivePeerConnection = new PeerConnection(localReceiveRef, remoteSendRef, configuration);
                             self.receivePeerConnection.on('addstream', function(stream) {
+                                self.receiveStreamList[remoteId] = true;
                                 var wildStream = new WildStream(remoteId);
                                 wildStream.setStream(stream);
                                 self.wildEmitter.emit('stream_added', wildStream);
+                                // emit 'stream_removed'
+                                wildData.onStreamRemove(remoteSendRef, function() {
+                                    var wildStream = new WildStream(remoteId);
+                                    wildStream.setStream(null);
+                                    if (self.receiveStreamList[remoteId]) {
+                                        delete self.receiveStreamList[remoteId];
+                                        self.wildEmitter.emit('stream_removed', wildStream);
+
+                                        wildData.offStreamRemove(remoteSendRef);
+                                    }
+                                });
                             });
                             self.receivePeerConnection.on('removestream', function() {
+                                if (self.receiveStreamList[remoteId])
+                                    delete self.receiveStreamList[remoteId];
                                 var wildStream = new WildStream(remoteId);
                                 wildStream.setStream(null);
                                 self.wildEmitter.emit('stream_removed', wildStream);
                             });
-                            wildData.onStreamRemove(localReceiveRef, function() {
-                                var wildStream = new WildStream(remoteId);
-                                wildStream.setStream(null);
-                                self.wildEmitter.emit('stream_removed', wildStream);
-                            });
+
                             self.receivePeerList[remoteId] = self.receivePeerConnection;
                             if (self.isAddStream) {
                                 if (self.localStream != null) {
                                     self.sendPeerConnection.addStream(self.localStream.getStream(), function(err) {
                                         console.log('addstream');
-                                        callback(err);
                                     })
                                 } else {
                                     self.getLocalStream(null, function(wildStream) {
                                         self.sendPeerConnection.addStream(wildStream.getStream(), function(err) {
                                             console.log('addstream default');
-                                            callback(err);
                                         })
                                     })
                                 }
@@ -77,8 +86,6 @@ WildRTC.prototype.join = function(callback) {
                         })
                     });
                     wildData.onUserRemoved(self.uid, function(remoteId) {
-                        var wildStream = new WildStream(remoteId);
-                        self.wildEmitter.emit('stream_removed', wildStream);
                         if (self.hasStreamList[remoteId]) {
                             self.hasStreamList[remoteId].close();
                             delete self.hasStreamList[remoteId];
