@@ -4,12 +4,14 @@ var KurentoStream = require('./kurento/KurentoRoom.js').KurentoStream;
 var EventEmitter = require('./kurento/EventEmitter.js');
 var WildStream = require('./WildStream');
 
-var WildRTCProxy = function(ref) {
+var WildRTCProxy = function(ref, type) {
+    this.type = type;
     this.wildEmitter = new EventEmitter();
     this.wsUri;
     this.kurento;
-    this.roomId = ref.toString().split('/').pop();
+    this.roomId = ref.toString().split(':').pop();
     this.uid = ref.getAuth().uid;
+    this.token = ref.getAuth().token;
     this.room;
     // this.participantList = {};
     this.localParticipant;
@@ -24,7 +26,7 @@ WildRTCProxy.prototype.join = function(callback) {
         if (err) {
             console.error(err);
         };
-        self.room = kurento.Room({ room: self.roomId, user: self.uid });
+        self.room = kurento.Room({ room: self.roomId, user: self.uid, token: self.token, type: self.type });
         self.room.connect();
         self.room.addEventListener('room-connected', function(roomEvent) {
             var streams = roomEvent.streams;

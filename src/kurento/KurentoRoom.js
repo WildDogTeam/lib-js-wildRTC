@@ -45,7 +45,9 @@ function Room(kurento, options) {
 
         kurento.sendRequest('joinRoom', {
             user: options.user,
-            room: options.room
+            room: options.room,
+            token: options.token,
+            type: options.type
         }, function (error, response) {
             if (error) {
                 ee.emitEvent('error-room', [{
