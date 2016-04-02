@@ -50,10 +50,11 @@ WildData.prototype.join = function(uid, callback) {
 };
 
 WildData.prototype.leave = function(uid) {
-    this.ref.child('users').off('child_added');
-    this.ref.child('users').off('child_removed');
+    this.ref.child('userList').off('child_added');
+    this.ref.child('userList').off('child_removed');
     // ref.child('userStates').off('child_changed');
     this.ref.child('users/' + uid).remove();
+    this.ref.child('userList').remove();
     // ref.child('userStates/' + uid).remove();
 }
 
@@ -64,11 +65,15 @@ WildData.prototype.onceKey = function(remoteid, callback) {
 }
 
 WildData.prototype.onStreamRemove = function(ref, callback) {
-    ref.on('value',function(data){
-        if(data == null){
+    ref.on('value', function(data) {
+        if (data.val() == null) {
             callback();
         }
     })
+}
+
+WildData.prototype.offStreamRemove = function(ref, callback) {
+    ref.off('value');
 }
 
 module.exports = WildData;
