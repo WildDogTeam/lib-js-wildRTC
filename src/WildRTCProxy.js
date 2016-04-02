@@ -9,7 +9,7 @@ var WildRTCProxy = function(ref, type) {
     this.wildEmitter = new EventEmitter();
     this.wsUri;
     this.kurento;
-    this.roomId = ref.toString().split(':').pop();
+    this.roomId = ref.toString().split('//').pop();
     this.uid = ref.getAuth().uid;
     this.token = ref.getAuth().token;
     this.room;
@@ -29,6 +29,9 @@ WildRTCProxy.prototype.join = function(callback) {
         self.room = kurento.Room({ room: self.roomId, user: self.uid, token: self.token, type: self.type });
         self.room.connect();
         self.room.addEventListener('room-connected', function(roomEvent) {
+            window.onbeforeunload = function(){
+                self.kurento.close();
+            }
             var streams = roomEvent.streams;
             for (var i = 0; i < streams.length; i++) {
                 var remoteId = streams[i].getGlobalID();

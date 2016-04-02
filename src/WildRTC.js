@@ -4,7 +4,7 @@ var WildRTCDirect = require('./WildRTCDirect.js');
 var WildRTC = function(ref, type) {
     if (type == 'o2m') {
         this.wildRTC = new WildRTCProxy(ref, type);
-    } else if ('m2m') {
+    } else if (type == 'm2m' || null) {
         this.wildRTC = new WildRTCDirect(ref);
     } else {
         console.error("type wrong!");
