@@ -26,8 +26,8 @@ WildRTC.prototype.join = function(callback) {
     var configProvider = new ConfigProvider(this.appid, this.ref);
     var wildData = new WildData(this.ref);
     var self = this;
-    self.ref.child('keys/' + this.uid).set(this.key, function(err) {
-        self.ref.child('keys/' + this.uid).onDisconnect().remove();
+    self.ref.child('keys/' + self.uid).set(this.key, function(err) {
+        self.ref.child('keys/' + self.uid).onDisconnect().remove();
         wildData.join(self.uid, function(err) {
             if (err != null) {
                 callback(err);
