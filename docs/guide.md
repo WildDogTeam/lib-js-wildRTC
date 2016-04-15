@@ -11,15 +11,15 @@ WebRTC也可以用于移动端。野狗wildRTC项目的Android和iOS SDK也即�
 
 ## 浏览器支持
 目前wildRTC可应用于以下浏览器上：
-Chrome: 23+
-Firefox: 22+
-Opera: 18+
+- Chrome: 23+
+- Firefox: 22+
+- Opera: 18+
 
 移动端浏览器：
-Android Browser: Android5.0+
-Opera for Android
-Chrome for Android
-Firefox for Android
+- Android Browser: Android5.0+
+- Opera for Android
+- Chrome for Android
+- Firefox for Android
 
 
 
