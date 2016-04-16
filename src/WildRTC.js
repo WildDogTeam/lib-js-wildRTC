@@ -130,11 +130,6 @@ WildRTC.prototype.leave = function() {
 WildRTC.prototype.getLocalStream = function(options, callback, cancelCallback) {
     var self = this;
     if (options != null) {
-        if (options['audio'] == true) {
-            options['audio'] = {
-                'echoCancellation': true
-            }
-        }
         navigator.getUserMedia(options, function(stream) {
             var wildStream = new WildStream(self.uid);
             wildStream.setStream(stream);
@@ -145,9 +140,7 @@ WildRTC.prototype.getLocalStream = function(options, callback, cancelCallback) {
         })
     } else {
         navigator.getUserMedia({
-            'audio': {
-                'echoCancellation': true
-            },
+            'audio': true,
             'video': true
         }, function(stream) {
             var wildStream = new WildStream(self.uid);
