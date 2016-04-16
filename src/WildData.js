@@ -54,7 +54,7 @@ WildData.prototype.leave = function(uid) {
     this.ref.child('userList').off('child_removed');
     // ref.child('userStates').off('child_changed');
     this.ref.child('users/' + uid).remove();
-    this.ref.child('userList').remove();
+    this.ref.child('userList/' + uid).remove();
     // ref.child('userStates/' + uid).remove();
 }
 

@@ -26,7 +26,8 @@ WildRTC.prototype.join = function(callback) {
     var configProvider = new ConfigProvider(this.appid, this.ref);
     var wildData = new WildData(this.ref);
     var self = this;
-    self.ref.child('keys/' + this.uid).set(this.key, function(err) {
+    self.ref.child('keys/' + self.uid).set(this.key, function(err) {
+        self.ref.child('keys/' + self.uid).onDisconnect().remove();
         wildData.join(self.uid, function(err) {
             if (err != null) {
                 callback(err);
@@ -103,6 +104,7 @@ WildRTC.prototype.join = function(callback) {
 }
 
 WildRTC.prototype.leave = function() {
+    this.ref.child('keys/' + this.uid).remove();
     for (var peer in this.hasStreamList) {
         if (this.hasStreamList[peer].signalingState != 'closed') {
             this.hasStreamList[peer].close();
@@ -128,11 +130,6 @@ WildRTC.prototype.leave = function() {
 WildRTC.prototype.getLocalStream = function(options, callback, cancelCallback) {
     var self = this;
     if (options != null) {
-        if (options['audio'] == true) {
-            options['audio'] = {
-                'echoCancellation': true
-            }
-        }
         navigator.getUserMedia(options, function(stream) {
             var wildStream = new WildStream(self.uid);
             wildStream.setStream(stream);
@@ -143,9 +140,7 @@ WildRTC.prototype.getLocalStream = function(options, callback, cancelCallback) {
         })
     } else {
         navigator.getUserMedia({
-            'audio': {
-                'echoCancellation': true
-            },
+            'audio': true,
             'video': true
         }, function(stream) {
             var wildStream = new WildStream(self.uid);
