@@ -7,8 +7,8 @@ WildStream.prototype.getId = function() {
     return this.uId;
 };
 
-WildStream.prototype.getStream = function(){
-	return this.stream;
+WildStream.prototype.getStream = function() {
+    return this.stream;
 }
 
 WildStream.prototype.setStream = function(stream) {
@@ -16,8 +16,7 @@ WildStream.prototype.setStream = function(stream) {
 };
 
 WildStream.prototype.bindToDOM = function(elementId) {
-    var view = document.getElementById(elementId);
-    view.src = URL.createObjectURL(this.stream);
+    attachMediaStream(document.getElementById(elementId), this.stream);
 }
 
 module.exports = WildStream;

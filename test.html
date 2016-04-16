@@ -6,6 +6,11 @@
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <script src="https://cdn.wilddog.com/js/client/current/wilddog.js"></script>
     <script src="./lib/wildrtc.js"></script>
+    <style>
+        .hide {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -56,13 +61,15 @@
                             viewContainer.appendChild(v);
                             v.autoplay = true;
                             v.id = wildStream.getId();
-                            v.src = URL.createObjectURL(wildStream.getStream());
+                            wildStream.bindToDOM(v.id);
                         });
+
                         rtc.on('stream_removed', function(wildStream) {
                             var v = document.getElementById(wildStream.getId());
-                            v.remove();
+                            var parentVideo = document.getElementById('video-container');
+                            parentVideo.removeChild(v);
                         });
-                    }                
+                    }
                 });
             }
         });
