@@ -15,8 +15,8 @@ WildStream.prototype.setStream = function(stream) {
     this.stream = stream;
 };
 
-WildStream.prototype.bindToDOM = function(elementId) {
-    attachMediaStream(document.getElementById(elementId), this.stream);
+WildStream.prototype.bindToDOM = function(element) {
+    attachMediaStream(element, this.stream);
 }
 
 module.exports = WildStream;
