@@ -14,7 +14,7 @@ WebRTC 也可以用于移动端。野狗 wildRTC 项目的 Android 和 iOS SDK �
 - Chrome: 23+
 - Firefox: 22+
 - Opera: 18+
-- Safari: 7.0+ (os x 10.9+)
+- Safari: 7.0+ (需要安装插件 & os x 10.9+)
 
 移动端浏览器：
 - Android Browser: Android5.0+
