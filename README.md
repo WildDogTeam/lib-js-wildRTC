@@ -140,10 +140,11 @@ wildRTC.addStream(wildStream);
 
 ### 媒体流与页面绑定
 
-WildStream 对象提供`bindToDOM(elementId)`快速将媒体流与页面绑定。
+WildStream 对象提供`bindToDOM(element)`快速将媒体流与页面绑定。
 
 ```js
-wildStream.bindToDOM('self_view');
+var self_view = document.getElementById('self_view');
+wildStream.bindToDOM(self_view);
 ```
 
 [更多API文档](./docs/api.md)
