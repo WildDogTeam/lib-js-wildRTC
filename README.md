@@ -21,6 +21,15 @@
 	git clone https://github.com/WildDogTeam/lib-js-wildRTC.git
 	cd lib-js-wildRTC
 
+### （可选）本地编译
+
+如果想要自己对源码进行修改，或者担心 wildrtc 的依赖库有更新，想要升级 wildrtc.js ，建议重新编译生成 wildrtc.js:
+
+	npm install
+	gulp build
+
+注意：如果没有安装 npm 或 gulp，请安装。
+
 ### 打开测试服务
 
 	node https_channel_server.js
@@ -41,7 +50,7 @@
 
 ## 下载
 
-要在你的工程中使用 WildRTC，你需要将 lib 目录下的 wildrtc.js 拷贝到本地，并在你的 HTML 页面中引入以下文件：
+要在你的工程中使用 WildRTC，你需要引用 cdn 中的 wildrtc.js ，或者将 lib 目录下的 wildrtc.js 拷贝到本地，并在你的 HTML 页面中引入以下文件：
 
 ```html
 <!-- Wilddog -->
@@ -49,6 +58,8 @@
 
 <!-- WildRTC -->
 <script src="wildrtc.js"></script>
+或
+<script>src="https://cdn.wilddog.com/wildrtc/sdk/web/current/wildrtc.js"</script>
 ```
 
 你也可以通过 npm 安装 WildRTC, 他们会自动下载依赖。
