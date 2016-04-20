@@ -1,3 +1,8 @@
+v0.1.12 2016-04-20
+修改：
+    修改wildStream.bindToDOM()入参类型，入参由elementId改为element。
+修复：
+    修复safari浏览器中将wildStream与Obeject元素绑定失败的问题。
 v0.1.11 2016-04-16
 新增：
     增加对OSX下的 safari 浏览器支持，需要按照提示安装插件。
