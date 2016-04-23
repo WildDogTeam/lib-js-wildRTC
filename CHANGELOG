@@ -1,6 +1,6 @@
 v0.1.13 2016-04-23
-修改：
-    修改 wildStream.bindToDOM() 入参类型，入参由 elementId 改为 element。
+优化：
+    优化 wildStream.bindToDOM() 入参类型，入参由 elementId 改为 element。
 修复：
     修复 safari 浏览器中将 wildStream 与 Obeject 元素绑定失败的问题。
     修复使用 nodejs 时，wildrtc 无法 require 的 bug。
