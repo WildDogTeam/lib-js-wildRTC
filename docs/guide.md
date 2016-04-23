@@ -10,7 +10,7 @@ WebRTC 得到了 Chrome，Firefox 等浏览器的支持，但开发者基于 Web
 WebRTC 也可以用于移动端。野狗 wildRTC 项目的 Android 和 iOS SDK 也即将推出。
 
 ## 浏览器支持
-目前 wildRTC 可应用于以下浏览器上：
+目前 wildRTC 可应用于以下 PC 端浏览器上：
 - Chrome: 23+
 - Firefox: 22+
 - Opera: 18+

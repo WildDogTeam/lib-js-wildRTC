@@ -252,7 +252,7 @@ var rtc = new WildRTC(ref);
 
 rtc.getLocalStream({"video":true, "audio":false}, function(stream){
   
-});  
+});
 ```
 <hr>
 
@@ -285,7 +285,7 @@ var rtc = new WildRTC(ref);
 rtc.getLocalStream({"video":true, "audio":false}, function(stream){
   var local_view = document.getElementById('local_view');
   stream.bindToDOM(local_view);
-});  
+});
 </script>
 ```
 
@@ -308,7 +308,7 @@ var rtc = new WildRTC(ref);
 
 rtc.getLocalStream({"video":true, "audio":false}, function(stream){
   var userId = stream.getId();
-});  
+});
 
 ```
 
@@ -331,7 +331,7 @@ var rtc = new WildRTC(ref);
 
 rtc.getLocalStream({"video":true, "audio":false}, function(stream){
   var originStream = stream.getStream();
-});  
+});
 
 ```
 <hr>
