@@ -1,4 +1,4 @@
-v0.1.13 2016-04-23
+v0.1.13 2016-04-25
 优化：
     优化 wildStream.bindToDOM() 入参类型，入参由 elementId 改为 element。
 修复：
