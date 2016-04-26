@@ -2,6 +2,21 @@
 
 使用 [Wilddog](https://www.wilddog.com) 实现的实时音视频聊天库。
 
+野狗 wildRTC 项目的 iOS SDK 已经推出，Android SDK 即将推出。
+
+## 浏览器支持
+目前 wildRTC 可应用于以下 PC 端浏览器上：
+- Chrome: 23+
+- Firefox: 22+
+- Opera: 18+
+- Safari: 7.0+ (需要安装插件 & OSX 10.9+)
+
+移动端浏览器：
+- Android Browser: Android5.0+
+- Opera for Android
+- Chrome for Android
+- Firefox for Android
+
 ## 在线示例
 
 我们提供了一个实例，登录到同一个房间的用户之间能够进行实时音视频聊天。
