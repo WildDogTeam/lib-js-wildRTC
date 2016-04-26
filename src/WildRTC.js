@@ -21,7 +21,9 @@ var WildRTC = function(ref, callback) {
     this.key = Math.random().toString(16).substr(2);
 }
 
-window.WildRTC = WildRTC;
+module.exports = WildRTC;
+if (window)
+    window.WildRTC = WildRTC;
 WildRTC.prototype.join = function(callback) {
     var configProvider = new ConfigProvider(this.appid, this.ref);
     var wildData = new WildData(this.ref);

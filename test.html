@@ -48,7 +48,8 @@
 
                         rtc.join(function() {
                             rtc.getLocalStream(null, function(wildStream) {
-                                wildStream.bindToDOM('self_view');
+				var localElement = document.getElementById('self_view');
+                                wildStream.bindToDOM(localElement);
                                 rtc.addStream(wildStream);
                             }, function(err) {
                                 console.error(err);
@@ -61,7 +62,7 @@
                             viewContainer.appendChild(v);
                             v.autoplay = true;
                             v.id = wildStream.getId();
-                            wildStream.bindToDOM(v.id);
+                            wildStream.bindToDOM(v);
                         });
 
                         rtc.on('stream_removed', function(wildStream) {

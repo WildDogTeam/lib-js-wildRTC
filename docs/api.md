@@ -216,7 +216,8 @@ var rtc = new WildRTC(ref);
 
 rtc.on('stream_added', function(wildStream) {
   //将流绑定到DOM播放
-  wildStream.bindToDOM('remote_view');
+  var remote_view = document.getElementById('remote_view');
+  wildStream.bindToDOM(remote_view);
 });
 
 rtc.off('stream_added', function(err){
@@ -251,7 +252,7 @@ var rtc = new WildRTC(ref);
 
 rtc.getLocalStream({"video":true, "audio":false}, function(stream){
   
-});  
+});
 ```
 <hr>
 
@@ -282,8 +283,9 @@ HTML 页面的某个 DOM 对象，可以为 \<video\> 或 \<audio\>。
 var rtc = new WildRTC(ref);
 
 rtc.getLocalStream({"video":true, "audio":false}, function(stream){
-  stream.bindToDOM('local_view');
-});  
+  var local_view = document.getElementById('local_view');
+  stream.bindToDOM(local_view);
+});
 </script>
 ```
 
@@ -306,7 +308,7 @@ var rtc = new WildRTC(ref);
 
 rtc.getLocalStream({"video":true, "audio":false}, function(stream){
   var userId = stream.getId();
-});  
+});
 
 ```
 
@@ -329,7 +331,7 @@ var rtc = new WildRTC(ref);
 
 rtc.getLocalStream({"video":true, "audio":false}, function(stream){
   var originStream = stream.getStream();
-});  
+});
 
 ```
 <hr>

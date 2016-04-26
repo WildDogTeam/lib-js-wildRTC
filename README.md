@@ -2,6 +2,21 @@
 
 使用 [Wilddog](https://www.wilddog.com) 实现的实时音视频聊天库。
 
+野狗 wildRTC 项目的 [iOS SDK](https://cdn.wilddog.com/wildrtc/sdk/ios/WildRTC.framework-0.1.0.zip) 已经推出，Android SDK 即将推出。
+
+## 浏览器支持
+目前 wildRTC 可应用于以下 PC 端浏览器上：
+- Chrome: 23+
+- Firefox: 22+
+- Opera: 18+
+- Safari: 7.0+ (需要安装插件 & OSX 10.9+)
+
+移动端浏览器：
+- Android Browser: Android5.0+
+- Opera for Android
+- Chrome for Android
+- Firefox for Android
+
 ## 在线示例
 
 我们提供了一个实例，登录到同一个房间的用户之间能够进行实时音视频聊天。
@@ -20,6 +35,15 @@
 
 	git clone https://github.com/WildDogTeam/lib-js-wildRTC.git
 	cd lib-js-wildRTC
+
+### （可选）本地编译
+
+如果想要自己对源码进行修改，或者担心 wildrtc 的依赖库有更新，想要升级 wildrtc.js ，建议重新编译生成 wildrtc.js:
+
+	npm install
+	gulp build
+
+注意：如果没有安装 npm 或 gulp，请安装。
 
 ### 打开测试服务
 
@@ -41,7 +65,7 @@
 
 ## 下载
 
-要在你的工程中使用 WildRTC，你需要将 lib 目录下的 wildrtc.js 拷贝到本地，并在你的 HTML 页面中引入以下文件：
+要在你的工程中使用 WildRTC，你需要引用 cdn 中的 wildrtc.js ，或者将 lib 目录下的 wildrtc.js 拷贝到本地，并在你的 HTML 页面中引入以下文件：
 
 ```html
 <!-- Wilddog -->
@@ -49,6 +73,8 @@
 
 <!-- WildRTC -->
 <script src="wildrtc.js"></script>
+或
+<script>src="https://cdn.wilddog.com/wildrtc/sdk/web/current/wildrtc.js"</script>
 ```
 
 你也可以通过 npm 安装 WildRTC, 他们会自动下载依赖。
@@ -129,10 +155,11 @@ wildRTC.addStream(wildStream);
 
 ### 媒体流与页面绑定
 
-WildStream 对象提供`bindToDOM(elementId)`快速将媒体流与页面绑定。
+WildStream 对象提供`bindToDOM(element)`快速将媒体流与页面绑定。
 
 ```js
-wildStream.bindToDOM('self_view');
+var self_view = document.getElementById('self_view');
+wildStream.bindToDOM(self_view);
 ```
 
 [更多API文档](./docs/api.md)
