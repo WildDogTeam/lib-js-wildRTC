@@ -7,9 +7,9 @@
     <script src="https://cdn.wilddog.com/js/client/current/wilddog.js"></script>
     <script src="./lib/wildrtc.js"></script>
     <style>
-        .hide {
-            display: none;
-        }
+    .hide {
+        display: none;
+    }
     </style>
 </head>
 
@@ -46,15 +46,18 @@
                     if (auth != null) {
                         var rtc = new WildRTC(ref);
 
-                        rtc.join(function() {
-                            rtc.getLocalStream(null, function(wildStream) {
-				var localElement = document.getElementById('self_view');
-                                wildStream.bindToDOM(localElement);
-                                rtc.addStream(wildStream);
-                            }, function(err) {
-                                console.error(err);
-                            });
-
+                        rtc.join(function(err) {
+                            if (err == null) {
+                                rtc.getLocalStream(null, function(wildStream) {
+                                    var localElement = document.getElementById('self_view');
+                                    wildStream.bindToDOM(localElement);
+                                    rtc.addStream(wildStream);
+                                }, function(err) {
+                                    console.error(err);
+                                });
+                            }else{
+                                console.log(err);
+                            }
                         });
                         rtc.on('stream_added', function(wildStream) {
                             var viewContainer = document.getElementById("video-container");

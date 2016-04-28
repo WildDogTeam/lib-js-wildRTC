@@ -25,6 +25,29 @@ module.exports = WildRTC;
 if (window)
     window.WildRTC = WildRTC;
 WildRTC.prototype.join = function(callback) {
+    var myBrowser = function() {
+        //判断是否Safari浏览器
+        if ( /*@cc_on!@*/ false || !!document.documentMode) {
+            return "IE";
+        }; //判断是否IE浏览器
+        if (navigator.mediaDevices && navigator.userAgent.match(/Edge\/(\d+).(\d+)$/)) {
+            return "Edge";
+        } else {
+            return "others"
+        }
+    }();
+    var isAndroid = function(){
+        var userAgentInfo = navigator.userAgent;
+        if (userAgentInfo.indexOf('Android') > 0) {
+            return true;
+        }else{
+            return false;
+        }
+    }();
+    if (myBrowser!='others'||!isAndroid||typeof window.getUserMedia!= 'function' ||typeof window.RTCPeerConnection!= 'function') {
+        callback('ERROR: the Browser is not support wildrtc!');
+        return;
+    }
     var configProvider = new ConfigProvider(this.appid, this.ref);
     var wildData = new WildData(this.ref);
     var self = this;
@@ -33,6 +56,7 @@ WildRTC.prototype.join = function(callback) {
         wildData.join(self.uid, function(err) {
             if (err != null) {
                 callback(err);
+                return;
             } else {
                 configProvider.getConfig(function(configuration) {
                     wildData.onUserAdd(self.uid, function(remoteId) {
@@ -98,7 +122,7 @@ WildRTC.prototype.join = function(callback) {
                         };
                         self.receivePeerList[remoteId].close();
                     });
-                    callback();
+                    callback(null);
                 });
             }
         });
