@@ -13,9 +13,6 @@ WildData.prototype.onUserAdd = function(uid, callback) {
 
 WildData.prototype.onUserRemoved = function(uid, callback) {
     this.ref.child('userList').on('child_removed', function(snap) {
-        this.ref.child('userList/' + snap.key()).remove();
-        this.ref.child('users/' + uid + '/send/' + snap.key()).remove();
-        this.ref.child('users/' + uid + '/receive/' + snap.key()).remove();
         callback(snap.key());
     });
 };
