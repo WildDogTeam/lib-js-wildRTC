@@ -143,7 +143,7 @@ rtc.join(function (err){
     rtc.addStream(stream);
     ...
     //移除流
-    removeStream();
+    rtc.removeStream();
   }
 });
 ```
