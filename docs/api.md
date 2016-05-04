@@ -18,7 +18,7 @@ new WildRTC(ref)
 ###### 参数
 
 * ref `Wilddog` 
-Wilddog 实例，需要经过 auth 认证。
+Wilddog 实例，实例中的 path 就为实际上的聊天室所在位置，需要经过 auth 认证。
 
 ###### 返回值
 
