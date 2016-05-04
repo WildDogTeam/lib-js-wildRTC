@@ -87,7 +87,7 @@ $ npm install wildrtc --save
 
 ### 创建引用
 
-要使用 WildRTC，必须先创建 Wilddog 引用并登录或者匿名登录：
+要使用 WildRTC，必须先创建 Wilddog 引用并登录或者匿名登录，Wilddog 实例中的 path 即为聊天室所在的位置：
 
 ```js
 var ref = new Wilddog("https://<appId>.wilddogio.com/");
