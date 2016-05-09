@@ -2,6 +2,7 @@ var WildEmitter = require("wildemitter");
 var adapter = require('./adapter.debug');
 
 var Sender = function(ref, stream, config) {
+    this.ref.onDisconnect().remove();
     this.peerConnection = null;
     this.ref = ref;
     this.stream = stream;
@@ -59,7 +60,6 @@ Sender.prototype.init_ = function() {
         this.bufferedNewCandidate[key] = data;
 
     }.bind(this);
-    this.ref.onDisconnect().remove();
     this.tick = setInterval(function() {
         if (Object.keys(this.bufferedNewCandidate).length > 0) {
             this.senderCandiRef.update(this.bufferedNewCandidate);

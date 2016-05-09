@@ -81,23 +81,23 @@ WildRTC.prototype.join = function(callback) {
 }
 
 WildRTC.prototype.leave = function() {
-    for (var peer in this.hasSendStreamList) {
-        if (this.hasSendStreamList[peer].signalingState != 'closed') {
-            this.hasSendStreamList[peer].close();
-            delete this.hasSendStreamList[peer];
+    for (var remoteId in this.hasSendStreamList) {
+        if (this.hasSendStreamList[remoteId].signalingState != 'closed') {
+            this.hasSendStreamList[remoteId].close();
+            delete this.hasSendStreamList[remoteId];
         }
     }
-    for (var peer in this.noStreamList) {
-        delete this.noStreamList[peer];
+    for (var remoteId in this.noStreamList) {
+        delete this.noStreamList[remoteId];
     }
-    for (var peer in this.receivePeerList) {
-        if (this.receivePeerList[peer].signalingState != 'closed') {
-            this.receivePeerList[peer].close();
-            delete this.receivePeerList[peer];
+    for (var remoteId in this.receivePeerList) {
+        if (this.receivePeerList[remoteId].signalingState != 'closed') {
+            this.receivePeerList[remoteId].close();
+            delete this.receivePeerList[remoteId];
         }
     }
-    for (var peer in this.receiveStreamList) {
-        delete this.receiveStreamList[peer];
+    for (var remoteId in this.receiveStreamList) {
+        delete this.receiveStreamList[remoteId];
     }
     var wildData = new WildData(this.ref);
     wildData.leave(this.uid);

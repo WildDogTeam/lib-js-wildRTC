@@ -2,11 +2,12 @@ var WildEmitter = require("wildemitter");
 var adapter = require('./adapter.debug');
 
 var Receiver = function(ref, onStream, config) {
+    this.ref.onDisconnect().remove();
     this.peerConnection = null;
     this.ref = ref;
     this.onStream = onStream;
     this.offerRef = this.ref.child("offer");
-    this.anwserRef = this.ref.child("answer");
+    this.answerRef = this.ref.child("answer");
     this.senderCandiRef = this.ref.child("senderCandi");
     this.receiverCandiRef = this.ref.child("receiverCandi");
     this.config = config || {};
@@ -17,7 +18,6 @@ WildEmitter.mixin(Receiver);
 module.exports = Receiver;
 Receiver.prototype.init_ = function() {
     this.offerRef.on('value', this.offerCb_, this);
-    this.ref.onDisconnect().remove();
 }
 
 Receiver.prototype.candidateCb_ = function(snap) {
@@ -34,7 +34,7 @@ Receiver.prototype.candidateCb_ = function(snap) {
 Receiver.prototype.sendAnswer_ = function(cb) {
     this.peerConnection.createAnswer(function(desc) {
         this.peerConnection.setLocalDescription(desc, function() {
-            this.anwserRef.set(JSON.stringify(desc), function(err) {
+            this.answerRef.set(JSON.stringify(desc), function(err) {
                 if (err) {
                     cb(err);
                 } else {
@@ -49,6 +49,10 @@ Receiver.prototype.sendAnswer_ = function(cb) {
     })
 }
 Receiver.prototype.offerCb_ = function(snapshot) {
+    var offer = snapshot.val();
+    if (offer == null) {
+        return;
+    }
     this.peerConnection = new RTCPeerConnection();
     this.iceConnectionState = this.peerConnection.iceConnectionState;
     this.localDescription = this.peerConnection.localDescription
@@ -97,10 +101,6 @@ Receiver.prototype.offerCb_ = function(snapshot) {
         this.onStream.call(this, ev.stream);
     }.bind(this);
 
-    var offer = snapshot.val();
-    if (offer == null) {
-        return;
-    }
     //回answer 并且set remoteref
     var desc = new RTCSessionDescription(JSON.parse(offer));
 
