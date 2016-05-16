@@ -6,7 +6,7 @@
 
 ## 浏览器支持
 目前 wildRTC 可应用于以下 PC 端浏览器上：
-- Chrome: 23+
+- Chrome: 47+
 - Firefox: 22+
 - Opera: 18+
 - Safari: 7.0+ (需要安装插件 & OSX 10.9+)
