@@ -19,13 +19,15 @@
 
 ## 在线示例
 
-我们提供了一个实例，登录到同一个房间的用户之间能够进行实时音视频聊天。
+我们提供了一个示例，登录到同一个房间的用户之间能够进行实时音视频聊天。
 
 [![演示截图](./docs/snapshot.png)](https://wildrtc.wilddogapp.com/)
 
 ### 体验示例
 
 打开网页 https://wildrtc.wilddogapp.com ，输入房间名，进入房间。在同一房间的用户之间能够互相视频聊天。
+
+在线示例的 github 地址为：https://github.com/WildDogTeam/demo-realtime-wildrtc
 
 ## 本地运行
 
