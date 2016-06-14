@@ -2,7 +2,7 @@
 
 使用 [Wilddog](https://www.wilddog.com) 实现的实时音视频聊天库。
 
-野狗 wildRTC 项目的 [iOS SDK](https://dl.wdstatic.cn/wildrtc/sdk/ios/WildRTC.framework-0.1.1.zip) 已经推出，Android SDK 即将推出。
+野狗 wildRTC 项目的 [iOS SDK](https://dl.wdstatic.cn/wildrtc/sdk/ios/WildRTC.framework-0.1.1.zip) 和 [Android SDK](https://dl.wdstatic.cn/wildrtc/sdk/android/wildRTC-Android-SDK-0.1.0.zip) 已经可以下载。
 
 ## 浏览器支持
 目前 wildRTC 可应用于以下 PC 端浏览器上：
