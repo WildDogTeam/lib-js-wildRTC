@@ -155,24 +155,25 @@ WildRTC.prototype.leave = function() {
 
 WildRTC.prototype.getLocalStream = function(options, callback, cancelCallback) {
     var self = this;
-    var FrameRate;
-    var Width;
-    var Height;
-    var videoParam;
-    if (!options) {
-        videoParam = true;
+    var audioParam;
+    var videoParam = {};
+    if (options.audio) {
+        audioParam = options.audio;
     } else {
-        FrameRate = options['FrameRate'] ? options['FrameRate'] : null;
-        Width = options['Width'] ? options['Width'] : null;
-        Height = options['Height'] ? options['Height'] : null;
-    }
-    if (!FrameRate && !Width && !Height)
+        audioParam = true;
+    };
+    if (options.video) {
+        if (options.video.FrameRate)
+            videoParam.FrameRate = options.video.FrameRate;
+        if (options.video.Width)
+            videoParam.Width = options.video.Width;
+        if (options.video.Height)
+            videoParam.Height = options.video.Height;
+    } else {
         videoParam = true;
-    FrameRate ? videoParam["FrameRate"] = FrameRate : null;
-    Width ? videoParam["Width"] = Width : null;
-    Height ? videoParam["Height"] = Height : null;
+    }
     var config = {
-        audio: true,
+        audio: audioParam,
         video: videoParam
     };
     navigator.getUserMedia(config, function(stream) {
