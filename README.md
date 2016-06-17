@@ -138,7 +138,7 @@ wildRTC.getLocalStream(options,function(WildStream){
 })
 ```
 
-options 内容为设置获取媒体流的规格，为 JSON 字符串。可以传入`{"video":true|false, "audio":true|false}`来设置`video`和`audio`的开启情况。回调函数中的参数为 WildStream 对象类型。
+options 内容为设置获取媒体流的规格，为 JSON 字符串。可以传入`{"video":true|false, "audio":true|false}`来设置`video`和`audio`的开启情况。video 还可以设置帧率和分辨率，可以查看 docs 目录下的 API 文档。回调函数中的参数为 WildStream 对象类型。
 
 
 <hr>

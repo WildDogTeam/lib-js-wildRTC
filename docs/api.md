@@ -52,7 +52,7 @@ join(onComplete)
 ###### 参数
 
 * onComplete `function(err)`
-如果操作成功`err`为`null`；否则，`err`为包含错误码`code`的对象。
+如果操作成功`err`为`null`；否则，否则，`err`为错误信息。
 
 ###### 示例
 
@@ -108,7 +108,7 @@ addStream(stream,onComplete)
 WildStream 流对象。
 
 * onComplete `function(err)`
-如果操作成功`err`为`null`；否则，`err`为包含错误码`code`的对象。
+如果操作成功`err`为`null`；否则，`err`为错误信息。
 
 ###### 示例
 
@@ -185,7 +185,7 @@ on(type, callback, \[cancelCallback\])
 `stream`为`WildStream`类型，当监听到`stream_added`事件时，回调函数被触发，`stream`参数为新增加的流；当监听到`stream_removed`事件时，回调函数被触发，`stream`参数为被移除的流。
 
 * cancelCallback `function(err)`
-如果操作失败，这个函数会被调用。传入一个`Error`对象，包含为何失败的信息。
+如果操作失败，这个函数会被调用。`err`为错误信息。
 
 ###### 示例
 
@@ -218,7 +218,6 @@ off(type, callback)
 `stream_added` `stream_removed`之一。
 
 * callback `function(err)`
-如果操作成功`err`为`null`；否则，`err`为包含错误码`code`的对象。
 
 ###### 示例
 
@@ -256,6 +255,9 @@ getLocalStream(options, callback, cancelCallback)
 
 * callback `function(stream)`
 `stream`为`WildStream`类型。
+
+* cancelCallback `function(err)`
+`err`为错误信息。
 
 ###### 示例
 

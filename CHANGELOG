@@ -1,3 +1,9 @@
+v0.1.17 2016-06-17
+新增：
+    增加addStream的回调函数;
+    增加join的错误回调;
+    增加getLocalStream的配置参数。
+
 v0.1.14 2016-04-26
 优化：
     优化 wildStream.bindToDOM() 入参类型，入参由 elementId 改为 element。
