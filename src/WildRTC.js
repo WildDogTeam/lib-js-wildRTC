@@ -26,6 +26,21 @@ if (window)
     window.WildRTC = WildRTC;
 
 WildRTC.prototype.join = function(callback) {
+    var myBrowser = function() {
+        //判断是否Safari浏览器
+        if ( /*@cc_on!@*/ false || !!document.documentMode) {
+            return "IE";
+        }; //判断是否IE浏览器
+        if (navigator.mediaDevices && navigator.userAgent.match(/Edge\/(\d+).(\d+)$/)) {
+            return "Edge";
+        } else {
+            return "others"
+        }
+    }();
+    if (myBrowser != 'others' || typeof window.getUserMedia != 'function' || typeof window.RTCPeerConnection != 'function') {
+        callback('ERROR: the Browser is not support wildrtc!');
+        return;
+    }
     var configProvider = new ConfigProvider(this.appid, this.ref);
     var wildData = new WildData(this.ref);
     var self = this;
@@ -140,28 +155,34 @@ WildRTC.prototype.leave = function() {
 
 WildRTC.prototype.getLocalStream = function(options, callback, cancelCallback) {
     var self = this;
-    if (options != null) {
-        navigator.getUserMedia(options, function(stream) {
-            var wildStream = new WildStream(self.uid);
-            wildStream.setStream(stream);
-            self.localStream = wildStream;
-            callback(wildStream);
-        }, function(err) {
-            cancelCallback(err);
-        })
+    var FrameRate;
+    var Width;
+    var Height;
+    var videoParam;
+    if (!options) {
+        videoParam = true;
     } else {
-        navigator.getUserMedia({
-            'audio': true,
-            'video': true
-        }, function(stream) {
-            var wildStream = new WildStream(self.uid);
-            wildStream.setStream(stream);
-            self.localStream = wildStream;
-            callback(wildStream);
-        }, function(err) {
-            cancelCallback(err);
-        })
+        FrameRate = options['FrameRate'] ? options['FrameRate'] : null;
+        Width = options['Width'] ? options['Width'] : null;
+        Height = options['Height'] ? options['Height'] : null;
     }
+    if (!FrameRate && !Width && !Height)
+        videoParam = true;
+    FrameRate ? videoParam["FrameRate"] = FrameRate : null;
+    Width ? videoParam["Width"] = Width : null;
+    Height ? videoParam["Height"] = Height : null;
+    var config = {
+        audio: true,
+        video: videoParam
+    };
+    navigator.getUserMedia(config, function(stream) {
+        var wildStream = new WildStream(self.uid);
+        wildStream.setStream(stream);
+        self.localStream = wildStream;
+        callback(wildStream);
+    }, function(err) {
+        cancelCallback(err);
+    })
 };
 
 WildRTC.prototype.addStream = function(wildStream, cancelCallback) {
