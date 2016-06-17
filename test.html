@@ -49,7 +49,7 @@
                 var rtc = new WildRTC(ref);
 
                 rtc.join(function() {
-                    rtc.getLocalStream(null, function(wildStream) {
+                    rtc.getLocalStream({"video":{"Width":320,"Height":240},"audio":true}, function(wildStream) {
                         var localElement = document.getElementById('self_view');
                         wildStream.bindToDOM(localElement);
                         rtc.addStream(wildStream);
