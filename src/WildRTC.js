@@ -157,12 +157,12 @@ WildRTC.prototype.getLocalStream = function(options, callback, cancelCallback) {
     var self = this;
     var audioParam;
     var videoParam = {};
-    if (options.audio) {
+    if (options && options.audio) {
         audioParam = options.audio;
     } else {
         audioParam = true;
     };
-    if (options.video) {
+    if (options && options.video) {
         if (options.video.FrameRate)
             videoParam.FrameRate = options.video.FrameRate;
         if (options.video.Width)
