@@ -7,9 +7,9 @@
     <script src="https://cdn.wilddog.com/js/client/current/wilddog.js"></script>
     <script src="./lib/wildrtc.js"></script>
     <style>
-        .hide {
-            display: none;
-        }
+    .hide {
+        display: none;
+    }
     </style>
 </head>
 
@@ -41,38 +41,38 @@
         console.log("url = ", url);
         ref = new Wilddog(url);
         ref.authAnonymously(function(err) {
-            if (err == null) {
-                ref.onAuth(function(auth) {
-                    if (auth != null) {
-                        var rtc = new WildRTC(ref);
+            if (err != null)
+                return;
+            ref.onAuth(function(auth) {
+                if (auth == null)
+                    return;
+                var rtc = new WildRTC(ref);
 
-                        rtc.join(function() {
-                            rtc.getLocalStream(null, function(wildStream) {
-				var localElement = document.getElementById('self_view');
-                                wildStream.bindToDOM(localElement);
-                                rtc.addStream(wildStream);
-                            }, function(err) {
-                                console.error(err);
-                            });
-
-                        });
-                        rtc.on('stream_added', function(wildStream) {
-                            var viewContainer = document.getElementById("video-container");
-                            var v = document.createElement("video");
-                            viewContainer.appendChild(v);
-                            v.autoplay = true;
-                            v.id = wildStream.getId();
-                            wildStream.bindToDOM(v);
-                        });
-
-                        rtc.on('stream_removed', function(wildStream) {
-                            var v = document.getElementById(wildStream.getId());
-                            var parentVideo = document.getElementById('video-container');
-                            parentVideo.removeChild(v);
-                        });
-                    }
+                rtc.join(function() {
+                    rtc.getLocalStream({"video":{"Width":320,"Height":240},"audio":true}, function(wildStream) {
+                        var localElement = document.getElementById('self_view');
+                        wildStream.bindToDOM(localElement);
+                        rtc.addStream(wildStream);
+                    }, function(err) {
+                        console.error(err);
+                    });
                 });
-            }
+                rtc.on('stream_added', function(wildStream) {
+                    var viewContainer = document.getElementById("video-container");
+                    var v = document.createElement("video");
+                    viewContainer.appendChild(v);
+                    v.autoplay = true;
+                    v.id = wildStream.getId();
+                    wildStream.bindToDOM(v);
+                });
+
+                rtc.on('stream_removed', function(wildStream) {
+                    var v = document.getElementById(wildStream.getId());
+                    var parentVideo = document.getElementById('video-container');
+                    parentVideo.removeChild(v);
+                });
+            });
+
         });
     }
     </script>

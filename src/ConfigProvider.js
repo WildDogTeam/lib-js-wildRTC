@@ -14,11 +14,8 @@ ConfigProvider.prototype.getConfig = function(callback) {
             var res = null;
             if (req.status == 200) {
                 var message = JSON.parse(req.responseText);
-                console.log(req.responseText);
                 this.configuration = {};
                 this.configuration.iceServers = message.iceServers;
-                console.log("##############");
-                console.log(this.configuration);
                 callback(this.configuration);
             }
         }

@@ -24,7 +24,7 @@ gulp.task('test', function() {
   connect.server({
     root: './',
     livereload: true,
-    https: false,
+    https: true,
     fallback:"test.html"
   });
 });
