@@ -2,7 +2,7 @@
 
 使用 [Wilddog](https://www.wilddog.com) 实现的实时音视频聊天库。
 
-野狗 wildRTC 项目的 [iOS SDK](https://dl.wdstatic.cn/wildrtc/sdk/ios/WildRTC.framework-0.1.1.zip) 和 [Android SDK](https://dl.wdstatic.cn/wildrtc/sdk/android/wildRTC-Android-SDK-0.1.0.zip) 已经可以下载。
+野狗 wildRTC 项目的 [iOS SDK](https://cdn.wilddog.com/wildrtc/sdk/ios/wildRTC-iOS-SDK-0.2.0.zip) 和 [Android SDK](https://dl.wdstatic.cn/wildrtc/sdk/android/wildRTC-Android-SDK-0.1.0.zip) 已经可以下载。
 
 ## 浏览器支持
 目前 wildRTC 可应用于以下 PC 端浏览器上：
@@ -169,11 +169,6 @@ wildStream.bindToDOM(self_view);
 ## 注册Wilddog
 
 WildRTC 需要使用 Wilddog 数据库，你可以在此[注册](https://www.wilddog.com/my-account/signup) Wilddog 账户。
-
-## TODO
-
-- getLocalStream 支持更详细的配置 ： 进行中
-- 多浏览器支持 ： 进行中
 
 ## 支持
 如果在使用过程中有任何问题，请提 [issue](https://github.com/WildDogTeam/lib-js-wildRTC/issues) ，我会在 Github 上给予帮助。
