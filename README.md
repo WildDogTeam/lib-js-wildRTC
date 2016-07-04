@@ -2,7 +2,7 @@
 
 使用 [Wilddog](https://www.wilddog.com) 实现的实时音视频聊天库。
 
-野狗 wildRTC 项目的 [iOS SDK](https://cdn.wilddog.com/wildrtc/sdk/ios/WildRTC.framework-0.1.0.zip) 已经推出，Android SDK 即将推出。
+野狗 wildRTC 项目的 [iOS SDK](https://cdn.wilddog.com/wildrtc/sdk/ios/wildRTC-iOS-SDK-0.2.1.zip) 和 [Android SDK](https://cdn.wilddog.com/wildrtc/sdk/android/wildRTC-Android-SDK-0.2.2.zip) 已经可以下载。
 
 ## 浏览器支持
 目前 wildRTC 可应用于以下 PC 端浏览器上：
@@ -19,13 +19,15 @@
 
 ## 在线示例
 
-我们提供了一个实例，登录到同一个房间的用户之间能够进行实时音视频聊天。
+我们提供了一个示例，登录到同一个房间的用户之间能够进行实时音视频聊天。
 
 [![演示截图](./docs/snapshot.png)](https://wildrtc.wilddogapp.com/)
 
 ### 体验示例
 
 打开网页 https://wildrtc.wilddogapp.com ，输入房间名，进入房间。在同一房间的用户之间能够互相视频聊天。
+
+在线示例的 github 地址为：https://github.com/WildDogTeam/demo-realtime-wildrtc
 
 ## 本地运行
 
@@ -53,15 +55,15 @@
 
 备注：使用 https 服务是由于在 chrome 浏览器中，必须使用 https 服务才能调用本地摄像头和麦克风。
 
+在测试页面输入 [Wilddog](https://www.wilddog.com) 的 AppId，打开摄像头。同一 AppId 的不同用户将进入同一聊天室。
+
+**注意**，由于 test.html 采用**匿名登录**，因此该 AppId 需要**开启匿名登录**功能。 聊天室位于 AppId 对应的应用的 rtc 路径下。
+
 ### 进行测试
 
 界面截图：
 
 ![演示截图1](./docs/test.png)
-
-在测试页面输入 Wilddog 的 AppId，打开摄像头。同一 AppId 的不同用户将进入同一聊天室。
-
-注意，由于 test.html 采用匿名登录，因此该 AppId 需要开启匿名登录功能。 
 
 ## 下载
 
@@ -69,12 +71,12 @@
 
 ```html
 <!-- Wilddog -->
-<script src="https://cdn.wilddog.com/js/client/current/wilddog.js"></script>
+<script src="https://dl.wdstatic.cn/js/client/current/wilddog.js"></script>
 
 <!-- WildRTC -->
 <script src="wildrtc.js"></script>
 或
-<script>src="https://cdn.wilddog.com/wildrtc/sdk/web/current/wildrtc.js"</script>
+<script>src="https://dl.wdstatic.cn/wildrtc/sdk/web/current/wildrtc.js"</script>
 ```
 
 你也可以通过 npm 安装 WildRTC, 他们会自动下载依赖。
@@ -87,7 +89,7 @@ $ npm install wildrtc --save
 
 ### 创建引用
 
-要使用 WildRTC，必须先创建 Wilddog 引用并登录或者匿名登录：
+要使用 WildRTC，必须先创建 Wilddog 引用并登录或者匿名登录，Wilddog 实例中的 path 即为聊天室所在的位置：
 
 ```js
 var ref = new Wilddog("https://<appId>.wilddogio.com/");
@@ -167,11 +169,6 @@ wildStream.bindToDOM(self_view);
 ## 注册Wilddog
 
 WildRTC 需要使用 Wilddog 数据库，你可以在此[注册](https://www.wilddog.com/my-account/signup) Wilddog 账户。
-
-## TODO
-
-- getLocalStream 支持更详细的配置 ： 进行中
-- 多浏览器支持 ： 进行中
 
 ## 支持
 如果在使用过程中有任何问题，请提 [issue](https://github.com/WildDogTeam/lib-js-wildRTC/issues) ，我会在 Github 上给予帮助。
